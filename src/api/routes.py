@@ -10,7 +10,7 @@ import bcrypt
 api = Blueprint('api', __name__)
 
 
-@api.route('/user/<int:id>', methods=['GET'])
+@api.route('/private/<int:id>', methods=['GET'])
 @jwt_required()
 def get_user_id(id):
     user = User.query.get(id)
@@ -18,7 +18,7 @@ def get_user_id(id):
     print(token)
     return jsonify(user.serialize()), 201
 
-@api.route('/user/register', methods=['POST'])
+@api.route('/user/signup', methods=['POST'])
 def register():
     body = request.get_json()
     hashed = bcrypt.hashpw(body['password'].encode(), bcrypt.gensalt(14)) # encode convierte en bytes
