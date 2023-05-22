@@ -23,7 +23,7 @@ def register():
     body = request.get_json()
     hashed = bcrypt.hashpw(body['password'].encode(), bcrypt.gensalt(14)) # encode convierte en bytes
     new_user = User(body['email'],hashed.decode()) # decode para guardar psswd encriptado
-    print(new_user)
+    
     db.session.add(new_user)
     db.session.commit()
 
